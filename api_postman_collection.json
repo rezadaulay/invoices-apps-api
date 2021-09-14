@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "347f40b1-bfd9-4495-96eb-c47009e8046b",
+		"name": "Order Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listing Orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "inv_number",
+							"value": "INV/01901/10",
+							"description": "Cari bedasarkan nomor invoice",
+							"disabled": true
+						},
+						{
+							"key": "customer_username",
+							"value": "reza",
+							"description": "Cari bedasarkan username user",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"description": "Halaman",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "3",
+							"description": "Limit response",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "customer_username",
+							"description": "Dapat mengurutkan bedasarkan: transaction_date atau customer_username",
+							"disabled": true
+						},
+						{
+							"key": "sort_direction",
+							"value": "asc",
+							"description": "asc atau desc",
+							"disabled": true
+						},
+						{
+							"key": "payment_status",
+							"value": "0",
+							"description": "Filter bedasarkan status pembayaran: 0 atau 1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"inv_number\": \"INV/01901/10111\",\n    \"transaction_date\": \"2021-09-11\",\n    \"customer_name\": \"Reza Daulay\",\n    \"customer_username\": \"rezad\",\n    \"customer_email\": \"daulayreza@gmail.com\",\n    \"payment_status\": \"paid\",\n    \"fulfillment_status\": \"unfulfillment\",\n    \"total_amount\": 1900000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Order By ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"inv_number\": \"INV/01901/10111\",\n    \"transaction_date\": \"2021-09-11\",\n    \"customer_name\": \"Reza Daulay\",\n    \"customer_username\": \"rezad\",\n    \"customer_email\": \"daulayreza@gmail.com\",\n    \"payment_status\": \"paid\",\n    \"fulfillment_status\": \"unfulfillment\",\n    \"total_amount\": 1900000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/orders/39fd5805-97c9-4eab-9c39-f8f72fd3d9fd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"39fd5805-97c9-4eab-9c39-f8f72fd3d9fd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete An Order",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"inv_number\": \"INV/01901/10111\",\n    \"transaction_date\": \"2021-09-11\",\n    \"customer_name\": \"Reza Daulay\",\n    \"customer_username\": \"rezad\",\n    \"customer_email\": \"daulayreza@gmail.com\",\n    \"payment_status\": \"paid\",\n    \"fulfillment_status\": \"unfulfillment\",\n    \"total_amount\": 1900000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/orders/39fd5805-97c9-4eab-9c39-f8f72fd3d9fd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"39fd5805-97c9-4eab-9c39-f8f72fd3d9fd"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

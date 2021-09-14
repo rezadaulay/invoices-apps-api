@@ -47,8 +47,8 @@ exports.findAll = (req, res) => {
     if (inv_number) {
         condition['inv_number'] = { [Op.iLike]: `%${inv_number}%` };
     }
-    if (customer_name) {
-        condition['customer_name'] = { [Op.iLike]: `%${customer_name}%` };
+    if (customer_username) {
+        condition['customer_username'] = { [Op.iLike]: `%${customer_username}%` };
     }
     if (payment_status) {
         condition['payment_status'] = payment_status == 1;
