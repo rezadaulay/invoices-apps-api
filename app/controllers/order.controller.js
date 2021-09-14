@@ -41,7 +41,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Orders from the database.
 exports.findAll = (req, res) => {
-    const { page, size, inv_number, payment_status, customer_name, sort, sort_direction } = req.query;
+    const { page, size, inv_number, payment_status, customer_username, sort, sort_direction } = req.query;
 
     let condition = {};
     if (inv_number) {
