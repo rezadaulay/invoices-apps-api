@@ -3,14 +3,14 @@ const OrderModel = db.Orders;
 const Op = db.Sequelize.Op;
 
 const getPagination = (page, size) => {
-    const limit = size ? +size : 3;
-    const offset = page ? page * limit : 0;
+    const limit = size ? +size : 10;
+    const offset = page ? (page - 1) * limit : 0;
   
     return { limit, offset };
 };
 const getPagingData = (data, page, limit) => {
     const { count: totalItems, rows: orders } = data;
-    const currentPage = page ? +page : 0;
+    const currentPage = page ? +page : 1;
     const totalPages = Math.ceil(totalItems / limit);
   
     return { totalItems, orders, totalPages, currentPage };
@@ -56,7 +56,7 @@ exports.findAll = (req, res) => {
 
     const { limit, offset } = getPagination(page, size);
 
-    OrderModel.findAndCountAll({ where: Object.keys(condition).length ? condition : null, order: [ [sort ? sort : 'transaction_date', sort_direction === 'asc' ? 'ASC': 'DESC' ] ], limit, offset }).then(data => {
+    OrderModel.findAndCountAll({ where: Object.keys(condition).length ? condition : null, order: [ [sort ? sort : 'inv_number', sort_direction === 'asc' ? 'ASC': 'DESC' ] ], limit, offset }).then(data => {
         const response = getPagingData(data, page, limit);
         res.send(response);
     }).catch(err => {
@@ -96,9 +96,16 @@ exports.delete = (req, res) => {
                 message: "Error retrieving Order with id=" + id
             });
         } else {
-            data.destroy();
-            res.json({
-                message: "Deleted Order with id=" + id
+            data.destroy().then(() => {
+                res.json({
+                    message: "Deleted Order with id=" + id
+                });
+            })
+            .catch(() => {
+                res.status(500).json({
+                message:
+                    err.message || "Some error occurred while creating the Order."
+                });
             });
         }
     })
