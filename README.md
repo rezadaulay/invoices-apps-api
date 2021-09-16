@@ -3,7 +3,7 @@ Aplikasi ini menggunakan **node.js** dengan framework **express.js** dan orm **s
 
 ## Langkah Instalasi
 - Masuk ke direktori lalu jalankan command `npm install`
-- Lalu, sesuaikan konfigurasi anda dengan membuat file `.env.development`, silahkan contoh file example.env
+- Lalu, sesuaikan konfigurasi anda dengan membuat file `.env`, silahkan contoh file example.env
 - Lalu, sesuaikan konfigurasi database anda di: `app/config/database.json`
 - Jalankan command `node_modules/.bin/sequelize db:migrate`
 - Opsional: anda dapat menjalankan seeder data dengan command `node_modules/.bin/sequelize db:seed:all`
