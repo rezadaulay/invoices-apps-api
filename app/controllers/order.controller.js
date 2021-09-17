@@ -1,20 +1,7 @@
 const db = require('../db/models');
+const helpers = require('../helpers');
 const OrderModel = db.Orders;
 const Op = db.Sequelize.Op;
-
-const getPagination = (page, size) => {
-    const limit = size ? +size : 10;
-    const offset = page ? (page - 1) * limit : 0;
-  
-    return { limit, offset };
-};
-const getPagingData = (data, page, limit) => {
-    const { count: totalItems, rows: orders } = data;
-    const currentPage = page ? +page : 1;
-    const totalPages = Math.ceil(totalItems / limit);
-  
-    return { totalItems, orders, totalPages, currentPage };
-};
 
 // Create and Save a new Order
 exports.create = (req, res) => {
@@ -54,10 +41,10 @@ exports.findAll = (req, res) => {
         condition['payment_status'] = payment_status == 1;
     }
 
-    const { limit, offset } = getPagination(page, size);
+    const { limit, offset } = helpers.getPagination(page, size);
 
     OrderModel.findAndCountAll({ where: Object.keys(condition).length ? condition : null, order: [ [sort ? sort : 'inv_number', sort_direction === 'asc' ? 'ASC': 'DESC' ] ], limit, offset }).then(data => {
-        const response = getPagingData(data, page, limit);
+        const response = helpers.getPagingData(data, page, limit);
         res.send(response);
     }).catch(err => {
         res.status(500).send({
@@ -78,8 +65,7 @@ exports.findOne = (req, res) => {
         } else {
             res.json(data);
         }
-    })
-    .catch(() => {
+    }).catch(() => {
         res.status(500).json({
         message:
             err.message || "Some error occurred while creating the Order."
@@ -100,16 +86,14 @@ exports.delete = (req, res) => {
                 res.json({
                     message: "Deleted Order with id=" + id
                 });
-            })
-            .catch(() => {
+            }).catch(() => {
                 res.status(500).json({
                 message:
                     err.message || "Some error occurred while creating the Order."
                 });
             });
         }
-    })
-    .catch(() => {
+    }).catch(() => {
         res.status(500).json({
         message:
             err.message || "Some error occurred while creating the Order."

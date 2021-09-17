@@ -1,14 +1,17 @@
 const express = require("express");
 const cors = require("cors");
+var compression = require('compression');
 require('dotenv').config();
 
 const app = express();
 
-var corsOptions = {
+// CORS config
+app.use(cors({
   origin: "*"
-};
+}));
 
-app.use(cors(corsOptions));
+// use GZIP for faster response
+app.use(compression())
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -16,7 +19,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// simple route
+// route
 require("./app/routes/order.routes")(app);
 
 // set port, listen for requests
