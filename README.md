@@ -14,5 +14,5 @@ Aplikasi ini menggunakan **node.js** dengan framework **express.js** dan orm **s
 http://localhost:8081
 ```
 
-##API Collection
+## API Collection
 Tersedia Collection Postman di file `api_postman_collection.json`
